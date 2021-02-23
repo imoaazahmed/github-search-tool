@@ -1,0 +1,19 @@
+select.input-field {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding-right: 2.5rem;
+}
+select::-ms-expand {
+	display: none;
+}
+.custom-select {
+	position: relative;
+}
+.custom-select:after {
+	content: url("../../../img/down-arrow.png");
+	right: 16px;
+	top: 16px;
+	position: absolute;
+	pointer-events: none;
+}
