@@ -5,10 +5,12 @@
 	display: flex;
 	align-items: center;
 }
-.search-box > div:first-child > img {
+.search-box > div:first-child > a {
+	margin-right: 1rem;
+}
+.search-box > div:first-child > a > img {
 	height: 2.8rem;
 	width: auto;
-	margin-right: 1rem;
 }
 .search-box > div:first-child > div > h3 {
 	font-weight: 900;

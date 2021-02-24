@@ -1,4 +1,5 @@
 import { getUsers, getRepositories } from "../../services/searchService";
+import { store } from "../store";
 
 import {
 	FETCH_USERS_DATA_REQUEST,
@@ -36,16 +37,17 @@ export const fetchUsersDataFailure = (error) => {
 	};
 };
 
-export const fetchUsersData = (query) => {
+export const fetchUsersData = (search) => {
 	return async function (dispatch) {
 		try {
 			dispatch(fetchUsersDataRequest());
 
-			const data = await getUsers(query);
+			const { per_page, page } = store.getState().search.usersData.paginate;
+			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
+			const { data } = await getUsers(query);
 			dispatch(fetchUsersDataSuccess(data));
 		} catch (ex) {
-			dispatch(fetchUsersDataFailure(ex));
-			console.log("Error: ", ex);
+			dispatch(fetchUsersDataFailure(ex.response));
 		}
 	};
 };
@@ -71,16 +73,17 @@ export const fetchMoreUsersDataFailure = (error) => {
 	};
 };
 
-export const fetchMoreUsersData = (query) => {
+export const fetchMoreUsersData = (search) => {
 	return async function (dispatch) {
 		try {
 			dispatch(fetchMoreUsersDataRequest());
 
-			const data = await getUsers(query);
+			const { per_page, page } = store.getState().search.usersData.paginate;
+			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
+			const { data } = await getUsers(query);
 			dispatch(fetchMoreUsersDataSuccess(data));
 		} catch (ex) {
-			dispatch(fetchMoreUsersDataFailure(ex));
-			console.log("Error: ", ex);
+			dispatch(fetchMoreUsersDataFailure(ex.response));
 		}
 	};
 };
@@ -106,16 +109,17 @@ export const fetchRepositoriesDataFailure = (error) => {
 	};
 };
 
-export const fetchRepositoriesData = (query) => {
+export const fetchRepositoriesData = (search) => {
 	return async function (dispatch) {
 		try {
 			dispatch(fetchRepositoriesDataRequest());
 
-			const data = await getRepositories(query);
+			const { per_page, page } = store.getState().search.repositoriesData.paginate;
+			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
+			const { data } = await getRepositories(query);
 			dispatch(fetchRepositoriesDataSuccess(data));
 		} catch (ex) {
-			dispatch(fetchRepositoriesDataFailure(ex));
-			console.log("Error: ", ex);
+			dispatch(fetchRepositoriesDataFailure(ex.response));
 		}
 	};
 };
@@ -141,16 +145,17 @@ export const fetchMoreRepositoriesDataFailure = (error) => {
 	};
 };
 
-export const fetchMoreRepositoriesData = (query) => {
+export const fetchMoreRepositoriesData = (search) => {
 	return async function (dispatch) {
 		try {
 			dispatch(fetchMoreRepositoriesDataRequest());
 
-			const data = await getRepositories(query);
+			const { per_page, page } = store.getState().search.repositoriesData.paginate;
+			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
+			const { data } = await getRepositories(query);
 			dispatch(fetchMoreRepositoriesDataSuccess(data));
 		} catch (ex) {
-			dispatch(fetchMoreRepositoriesDataFailure(ex));
-			console.log("Error: ", ex);
+			dispatch(fetchMoreRepositoriesDataFailure(ex.response));
 		}
 	};
 };

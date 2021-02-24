@@ -1,5 +1,5 @@
 import http from "./httpService";
-const apiEndpoint = "https://api.github.com/search";
+const apiEndpoint = "/search";
 
 export async function getUsers(query) {
 	if (!query) return alert("Please add search query to the user endpoint!");

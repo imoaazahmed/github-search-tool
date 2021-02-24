@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchUsersData, fetchRepositoriesData } from "../../redux/index";
 import { useDispatch } from "react-redux";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 // Components
 import Input from "../common/Input/Input";
@@ -15,15 +16,27 @@ import "./SearchBox.css";
 function SearchBox(props) {
 	const [errorMessage, setErrorMessage] = useState("");
 	const dispatch = useDispatch();
+	const history = useHistory();
+	const { searchTypeParam, searchParam } = useParams();
 	const searchInput = useRef();
 	const searchTypeInput = useRef();
 	let timeout = null;
+
+	useEffect(() => {
+		searchInput.current.value = searchParam || "";
+		searchTypeInput.current.value = searchTypeParam || "users";
+
+		// When unmount stop submitting extra requests
+		return () => clearTimeout(timeout);
+
+		// eslint-disable-next-line
+	}, []);
 
 	const handleChange = () => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => {
 			handleSubmit();
-		}, 1000);
+		}, 500);
 	};
 
 	const handleSubmit = () => {
@@ -32,24 +45,21 @@ function SearchBox(props) {
 
 		// Validate
 		setErrorMessage("");
-		if (q.length === 0) return;
-		if (q.length > 0 && q.length < 3) {
-			return setErrorMessage("Please enter 3 characters or more.");
-		}
+		if (q.length === 0) return history.push("/");
+		if (q.length > 0 && q.length < 3) return setErrorMessage("Please enter 3 characters or more.");
 
-		if (searchType === "users") {
-			dispatch(fetchUsersData(`?q=${q}`));
-		}
+		if (searchType === "users") dispatch(fetchUsersData(q));
+		if (searchType === "repositories") dispatch(fetchRepositoriesData(q));
 
-		if (searchType === "repositories") {
-			dispatch(fetchRepositoriesData(`?q=${q}`));
-		}
+		history.push(`/search/${searchType}/${q}`);
 	};
 
 	return (
 		<div className="search-box">
 			<div>
-				<img src={GitHubLogo} alt="Logo" />
+				<Link to="/">
+					<img src={GitHubLogo} alt="Logo" />
+				</Link>
 				<div>
 					<h3>GitHub Searcher</h3>
 					<p>Search users or repositories below</p>
@@ -61,7 +71,7 @@ function SearchBox(props) {
 					type="text"
 					name="search"
 					placeholder="Start typing to search .."
-					onChange={handleChange}
+					onKeyUp={handleChange}
 					error={errorMessage}
 					ref={searchInput}
 					autoFocus
@@ -69,7 +79,6 @@ function SearchBox(props) {
 				<Select
 					name="searchType"
 					onChange={handleChange}
-					defaultValue="users"
 					ref={searchTypeInput}
 					options={[
 						{ name: "Users", value: "users" },

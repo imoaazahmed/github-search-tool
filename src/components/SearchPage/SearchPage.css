@@ -1,6 +1,50 @@
 .search-page-wrapper {
-	min-height: 100vh;
+	padding-top: 3rem;
+}
+
+.search-results-wrapper {
+	margin-top: 1.2rem;
+}
+
+.skeleton-loader-cards-wrapper {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.skeleton-loader-cards-wrapper > img {
+	width: 32%;
+	margin-bottom: 1rem;
+}
+
+.cards-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.cards-wrapper .single-card {
+	width: 32%;
+	margin-bottom: 1rem;
+	word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+	.skeleton-loader-cards-wrapper > img {
+		width: 48%;
+	}
+
+	.cards-wrapper .single-card {
+		width: 48%;
+	}
+}
+
+.user-card {
+	padding: 1rem;
+	border: 1px solid #ccc;
+}
+
+.repo-card {
+	padding: 1rem;
+	border: 1px solid #ccc;
 }
