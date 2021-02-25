@@ -13,18 +13,23 @@ import GitHubLogo from "../../img/github.svg";
 // CSS
 import "./SearchBox.css";
 
-function SearchBox(props) {
-	const [errorMessage, setErrorMessage] = useState("");
+const SearchBox: React.FC = () => {
+	const [errorMessage, setErrorMessage] = useState<string>("");
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { searchTypeParam, searchParam } = useParams();
-	const searchInput = useRef();
-	const searchTypeInput = useRef();
-	let timeout = null;
+	const { searchTypeParam, searchParam } = useParams<{ searchTypeParam?: string; searchParam?: string }>();
+	const searchInput = useRef<HTMLInputElement>(null);
+	const searchTypeInput = useRef<HTMLSelectElement>(null);
+	let timeout: any = null;
 
 	useEffect(() => {
-		searchInput.current.value = searchParam || "";
-		searchTypeInput.current.value = searchTypeParam || "users";
+		if (searchInput && searchInput.current) {
+			searchInput.current.value = searchParam || "";
+		}
+
+		if (searchTypeInput && searchTypeInput.current) {
+			searchTypeInput.current.value = searchTypeParam || "users";
+		}
 
 		// When unmount stop submitting extra requests
 		return () => clearTimeout(timeout);
@@ -40,8 +45,10 @@ function SearchBox(props) {
 	};
 
 	const handleSubmit = () => {
-		const { value: q } = searchInput.current;
-		const { value: searchType } = searchTypeInput.current;
+		let q: string = "";
+		let searchType: string = "";
+		q = searchInput.current ? searchInput.current.value : "";
+		searchType = searchTypeInput.current ? searchTypeInput.current.value : "";
 
 		// Validate
 		setErrorMessage("");
@@ -88,6 +95,6 @@ function SearchBox(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default SearchBox;

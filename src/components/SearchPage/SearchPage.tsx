@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchMoreUsersData, fetchMoreRepositoriesData } from "../../redux";
+import { RootState } from "../../redux/rootReducer";
 
 // Components
 import SearchBox from "../SearchBox/SearchBox";
@@ -12,10 +13,10 @@ import SkeletonLoaderCard from "../../img/skeleton-loader-card.svg";
 // CSS
 import "./SearchPage.css";
 
-function SearchPage(props) {
-	const usersData = useSelector((state) => state.search.usersData);
-	const repositoriesData = useSelector((state) => state.search.repositoriesData);
-	const { searchTypeParam, searchParam } = useParams();
+const SearchPage: React.FC = () => {
+	const usersData = useSelector((state: RootState) => state.search.usersData);
+	const repositoriesData = useSelector((state: RootState) => state.search.repositoriesData);
+	const { searchTypeParam = "", searchParam = "" } = useParams<{ searchTypeParam?: string; searchParam?: string }>();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -105,9 +106,49 @@ function SearchPage(props) {
 
 									{usersData.data?.items?.length !== 0 && (
 										<div className="cards-wrapper">
-											{usersData.data?.items?.map((user, index) => (
+											{usersData.data?.items?.map((user: any, index: number) => (
 												<div key={index} className="single-card user-card">
-													{user.login}
+													<div className="top-row">
+														<div className="avatar">
+															<a href={user.html_url} target="_blank" rel="noreferrer">
+																<img src={user.avatar_url} alt="Avatar" />
+															</a>
+														</div>
+														<div className="info">
+															<a href={user.html_url} target="_blank" rel="noreferrer">
+																<h3>{user.login}</h3>
+																<span>@{user.login}</span>
+															</a>
+														</div>
+														<div className="follow">
+															<a href={user.html_url} target="_blank" rel="noreferrer">
+																Follow
+															</a>
+														</div>
+													</div>
+
+													<div className="mid-row">
+														<div>
+															<a href={user.html_url + "?tab=repositories"} target="_blank" rel="noreferrer">
+																repos
+															</a>
+														</div>
+														<div>
+															<a href={user.html_url + "?tab=projects"} target="_blank" rel="noreferrer">
+																projects
+															</a>
+														</div>
+														<div>
+															<a href={user.html_url + "?tab=followers"} target="_blank" rel="noreferrer">
+																followers
+															</a>
+														</div>
+													</div>
+
+													<div className="bottom-row">
+														If you want to follow this GitHub user you can press on follow button and follow him from his
+														profile.
+													</div>
 												</div>
 											))}
 										</div>
@@ -124,7 +165,7 @@ function SearchPage(props) {
 
 									{repositoriesData.data?.items?.length !== 0 && (
 										<div className="cards-wrapper">
-											{repositoriesData.data?.items?.map((repo, index) => (
+											{repositoriesData.data?.items?.map((repo: any, index: number) => (
 												<div key={index} className="single-card repo-card">
 													{repo.name}
 												</div>
@@ -142,6 +183,6 @@ function SearchPage(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default SearchPage;

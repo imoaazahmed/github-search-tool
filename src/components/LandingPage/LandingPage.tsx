@@ -6,7 +6,7 @@ import SearchBox from "../SearchBox/SearchBox";
 // CSS
 import "./LandingPage.css";
 
-function LandingPage(props) {
+const LandingPage: React.FC = () => {
 	return (
 		<div className="page-container">
 			<div className="landing-page-wrapper">
@@ -14,6 +14,6 @@ function LandingPage(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default LandingPage;

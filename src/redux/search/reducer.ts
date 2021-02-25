@@ -13,6 +13,35 @@ import {
 	FETCH_MORE_REPOSITORIES_DATA_FAILURE,
 } from "./types";
 
+export interface SearchState {
+	usersData: {
+		loading: boolean;
+		data: {
+			items?: any;
+		};
+		error: object | null;
+		paginate: {
+			loading: boolean;
+			per_page: number;
+			page: number;
+			maxReached: boolean;
+		};
+	};
+	repositoriesData: {
+		loading: boolean;
+		data: {
+			items?: any;
+		};
+		error: object | null;
+		paginate: {
+			loading: boolean;
+			per_page: number;
+			page: number;
+			maxReached: boolean;
+		};
+	};
+}
+
 const initialState = {
 	usersData: {
 		loading: true,
@@ -38,7 +67,12 @@ const initialState = {
 	},
 };
 
-const reducer = (state = initialState, action) => {
+type Action = {
+	type: string;
+	payload: any;
+};
+
+const reducer = (state: SearchState = initialState, action: Action) => {
 	switch (action.type) {
 		// Fetch Users Data
 		case FETCH_USERS_DATA_REQUEST:

@@ -7,7 +7,7 @@ axios.interceptors.request.use(async (request) => {
 	return request;
 });
 
-axios.interceptors.response.use(null, (error) => {
+axios.interceptors.response.use(undefined, (error) => {
 	const expectedError = error.response && error.response.status >= 400 && error.response.status < 500;
 	if (!expectedError) {
 		console.error("An unexpected error has occured: ", error.response);

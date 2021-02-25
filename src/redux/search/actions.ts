@@ -16,6 +16,8 @@ import {
 	FETCH_MORE_REPOSITORIES_DATA_FAILURE,
 } from "./types";
 
+type DispatchType = (args: object) => void;
+
 // Fetch Users Data
 export const fetchUsersDataRequest = () => {
 	return {
@@ -23,29 +25,29 @@ export const fetchUsersDataRequest = () => {
 	};
 };
 
-export const fetchUsersDataSuccess = (data) => {
+export const fetchUsersDataSuccess = (data: object) => {
 	return {
 		type: FETCH_USERS_DATA_SUCCESS,
 		payload: data,
 	};
 };
 
-export const fetchUsersDataFailure = (error) => {
+export const fetchUsersDataFailure = (error: object) => {
 	return {
 		type: FETCH_USERS_DATA_FAILURE,
 		payload: error,
 	};
 };
 
-export const fetchUsersData = (search) => {
-	return async function (dispatch) {
+export const fetchUsersData = (search: string) => {
+	return async function (dispatch: DispatchType) {
 		try {
 			dispatch(fetchUsersDataRequest());
 
 			const { per_page, page } = store.getState().search.usersData.paginate;
 			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
-			const { data } = await getUsers(query);
-			dispatch(fetchUsersDataSuccess(data));
+			const response = await getUsers(query);
+			if (response) dispatch(fetchUsersDataSuccess(response.data));
 		} catch (ex) {
 			dispatch(fetchUsersDataFailure(ex.response));
 		}
@@ -59,29 +61,29 @@ export const fetchMoreUsersDataRequest = () => {
 	};
 };
 
-export const fetchMoreUsersDataSuccess = (data) => {
+export const fetchMoreUsersDataSuccess = (data: object) => {
 	return {
 		type: FETCH_MORE_USERS_DATA_SUCCESS,
 		payload: data,
 	};
 };
 
-export const fetchMoreUsersDataFailure = (error) => {
+export const fetchMoreUsersDataFailure = (error: object) => {
 	return {
 		type: FETCH_MORE_USERS_DATA_FAILURE,
 		payload: error,
 	};
 };
 
-export const fetchMoreUsersData = (search) => {
-	return async function (dispatch) {
+export const fetchMoreUsersData = (search: string) => {
+	return async function (dispatch: DispatchType) {
 		try {
 			dispatch(fetchMoreUsersDataRequest());
 
 			const { per_page, page } = store.getState().search.usersData.paginate;
 			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
-			const { data } = await getUsers(query);
-			dispatch(fetchMoreUsersDataSuccess(data));
+			const response = await getUsers(query);
+			if (response) dispatch(fetchMoreUsersDataSuccess(response.data));
 		} catch (ex) {
 			dispatch(fetchMoreUsersDataFailure(ex.response));
 		}
@@ -95,29 +97,29 @@ export const fetchRepositoriesDataRequest = () => {
 	};
 };
 
-export const fetchRepositoriesDataSuccess = (data) => {
+export const fetchRepositoriesDataSuccess = (data: object) => {
 	return {
 		type: FETCH_REPOSITORIES_DATA_SUCCESS,
 		payload: data,
 	};
 };
 
-export const fetchRepositoriesDataFailure = (error) => {
+export const fetchRepositoriesDataFailure = (error: object) => {
 	return {
 		type: FETCH_REPOSITORIES_DATA_FAILURE,
 		payload: error,
 	};
 };
 
-export const fetchRepositoriesData = (search) => {
-	return async function (dispatch) {
+export const fetchRepositoriesData = (search: string) => {
+	return async function (dispatch: DispatchType) {
 		try {
 			dispatch(fetchRepositoriesDataRequest());
 
 			const { per_page, page } = store.getState().search.repositoriesData.paginate;
 			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
-			const { data } = await getRepositories(query);
-			dispatch(fetchRepositoriesDataSuccess(data));
+			const response = await getRepositories(query);
+			if (response) dispatch(fetchRepositoriesDataSuccess(response.data));
 		} catch (ex) {
 			dispatch(fetchRepositoriesDataFailure(ex.response));
 		}
@@ -131,29 +133,29 @@ export const fetchMoreRepositoriesDataRequest = () => {
 	};
 };
 
-export const fetchMoreRepositoriesDataSuccess = (data) => {
+export const fetchMoreRepositoriesDataSuccess = (data: object) => {
 	return {
 		type: FETCH_MORE_REPOSITORIES_DATA_SUCCESS,
 		payload: data,
 	};
 };
 
-export const fetchMoreRepositoriesDataFailure = (error) => {
+export const fetchMoreRepositoriesDataFailure = (error: object) => {
 	return {
 		type: FETCH_MORE_REPOSITORIES_DATA_FAILURE,
 		payload: error,
 	};
 };
 
-export const fetchMoreRepositoriesData = (search) => {
-	return async function (dispatch) {
+export const fetchMoreRepositoriesData = (search: string) => {
+	return async function (dispatch: DispatchType) {
 		try {
 			dispatch(fetchMoreRepositoriesDataRequest());
 
 			const { per_page, page } = store.getState().search.repositoriesData.paginate;
 			const query = `?q=${search}&per_page=${per_page}&page=${page}`;
-			const { data } = await getRepositories(query);
-			dispatch(fetchMoreRepositoriesDataSuccess(data));
+			const response = await getRepositories(query);
+			if (response) dispatch(fetchMoreRepositoriesDataSuccess(response.data));
 		} catch (ex) {
 			dispatch(fetchMoreRepositoriesDataFailure(ex.response));
 		}

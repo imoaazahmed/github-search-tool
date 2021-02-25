@@ -1,10 +1,11 @@
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // Views
 import LandingPage from "./components/LandingPage/LandingPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<div className="App">
 			<Switch>
@@ -14,6 +15,6 @@ function App() {
 			</Switch>
 		</div>
 	);
-}
+};
 
 export default App;
