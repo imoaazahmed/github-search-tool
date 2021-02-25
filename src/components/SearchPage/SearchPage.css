@@ -43,6 +43,7 @@
 	}
 }
 
+/* User Card */
 .user-card {
 	padding: 0.5rem;
 	border: 1px solid #ccc;
@@ -74,6 +75,7 @@
 
 .user-card .top-row .info {
 	flex-grow: 1;
+	margin-right: 0.5rem;
 }
 
 .user-card .top-row .info a {
@@ -140,11 +142,6 @@
 	color: rgb(44, 44, 44);
 }
 
-.repo-card {
-	padding: 1rem;
-	border: 1px solid #ccc;
-}
-
 @media (max-width: 1200px) {
 	.user-card .top-row {
 		flex-direction: column;
@@ -169,6 +166,7 @@
 	.user-card .top-row .info {
 		margin-bottom: 0.5rem;
 		text-align: center;
+		margin-right: 0rem;
 	}
 
 	.user-card .top-row .follow a {
@@ -191,5 +189,133 @@
 
 	.user-card .mid-row > div > a {
 		text-align: left;
+	}
+}
+
+/* Repo Card */
+.repo-card {
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+}
+
+.repo-card .top-row {
+	display: flex;
+	align-items: center;
+	padding-bottom: 0.5rem;
+}
+
+.repo-card .top-row .avatar {
+	min-width: var(--avatar-height);
+	max-width: var(--avatar-height);
+	height: var(--avatar-height);
+	margin-right: 1rem;
+}
+
+.repo-card .top-row .avatar a {
+	display: inline-block;
+	height: var(--avatar-height);
+}
+
+.repo-card .top-row .avatar a img {
+	width: 100%;
+	border-radius: 0.2rem;
+}
+
+.repo-card .top-row .info {
+	flex-grow: 1;
+	margin-right: 0.5rem;
+}
+
+.repo-card .top-row .info a {
+	text-decoration: none;
+}
+
+.repo-card .top-row .info h3 {
+	color: #000;
+	line-height: 1.2rem;
+	text-transform: uppercase;
+	word-break: break-all;
+}
+
+.repo-card .top-row .info span {
+	color: rgb(73, 73, 73);
+	font-size: 0.9rem;
+}
+
+.repo-card .top-row .follow a {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background-color: rgb(23, 116, 255);
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+	border-radius: 0.2rem;
+}
+
+.repo-card .top-row .follow a:hover {
+	background-color: rgb(7, 93, 221);
+}
+
+.repo-card .mid-row {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.repo-card .bottom-row {
+	border-top: 1px solid #ccc;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	display: flex;
+}
+
+.repo-card .bottom-row > div {
+	margin-right: 1rem;
+}
+
+.repo-card .bottom-row > div {
+	text-decoration: none;
+	font-size: 0.8rem;
+}
+
+.repo-card .bottom-row > div > span:first-child {
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	margin-right: 0.5rem;
+}
+
+.repo-card .bottom-row > div > span:last-child {
+	color: rgb(46, 46, 46);
+	text-transform: uppercase;
+}
+
+@media (max-width: 1200px) {
+	.repo-card .top-row {
+		flex-direction: column;
+	}
+
+	.repo-card .top-row .avatar {
+		margin-bottom: 1rem;
+	}
+
+	.repo-card .top-row .avatar {
+		min-width: 90px;
+		max-width: 90px;
+		height: 90px;
+		margin-right: 0rem;
+	}
+
+	.repo-card .top-row .avatar a {
+		display: inline-block;
+		height: 90px;
+	}
+
+	.repo-card .top-row .info {
+		margin-bottom: 0.5rem;
+		text-align: center;
+		margin-right: 0rem;
+	}
+
+	.repo-card .top-row .follow a {
+		padding-right: 2rem;
+		padding-left: 2rem;
 	}
 }

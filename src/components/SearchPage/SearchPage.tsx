@@ -167,7 +167,41 @@ const SearchPage: React.FC = () => {
 										<div className="cards-wrapper">
 											{repositoriesData.data?.items?.map((repo: any, index: number) => (
 												<div key={index} className="single-card repo-card">
-													{repo.name}
+													<div className="top-row">
+														<div className="avatar">
+															<a href={repo.html_url} target="_blank" rel="noreferrer">
+																<img src={repo.owner.avatar_url} alt="Avatar" />
+															</a>
+														</div>
+														<div className="info">
+															<a href={repo.html_url} target="_blank" rel="noreferrer">
+																<h3>{repo.name}</h3>
+															</a>
+															<a href={repo.owner.html_url} target="_blank" rel="noreferrer">
+																<span>Created by {repo.owner.login}</span>
+															</a>
+														</div>
+														<div className="follow">
+															<a href={repo.html_url} target="_blank" rel="noreferrer">
+																Clone
+															</a>
+														</div>
+													</div>
+
+													<div className="mid-row">
+														<p>{repo.description ? repo.description : "..."}</p>
+													</div>
+
+													<div className="bottom-row">
+														<div>
+															<span>{repo.forks_count}</span>
+															<span>forks</span>
+														</div>
+														<div>
+															<span>{repo.stargazers_count}</span>
+															<span>stars</span>
+														</div>
+													</div>
 												</div>
 											))}
 										</div>
