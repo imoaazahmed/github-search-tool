@@ -105,8 +105,8 @@ function SearchPage(props) {
 
 									{usersData.data?.items?.length !== 0 && (
 										<div className="cards-wrapper">
-											{usersData.data?.items?.map((user) => (
-												<div key={user.id} className="single-card user-card">
+											{usersData.data?.items?.map((user, index) => (
+												<div key={index} className="single-card user-card">
 													{user.login}
 												</div>
 											))}
@@ -124,8 +124,8 @@ function SearchPage(props) {
 
 									{repositoriesData.data?.items?.length !== 0 && (
 										<div className="cards-wrapper">
-											{repositoriesData.data?.items?.map((repo) => (
-												<div key={repo.id} className="single-card repo-card">
+											{repositoriesData.data?.items?.map((repo, index) => (
+												<div key={index} className="single-card repo-card">
 													{repo.name}
 												</div>
 											))}
